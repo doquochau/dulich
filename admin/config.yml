@@ -8,6 +8,20 @@ public_folder: "/images"
 locale: vi
 
 collections:
+- name: "text_management"
+    label: "Quản lý nội dung text"
+    delete: false # Không cho phép khách xóa file cấu hình này
+    editor:
+      preview: false # Tắt preview nếu không cần thiết
+    files:
+      - name: "homepage_text"
+        label: "Nội dung Trang Chủ"
+        file: "config.json" # File JSON mà CMS sẽ ghi dữ liệu vào
+        fields:
+          - { name: "site_title", label: "Tiêu đề Website", widget: "string" }
+          - { name: "hero_subtitle", label: "Mô tả ngắn (Hero)", widget: "text" }
+          - { name: "about_text", label: "Giới thiệu chung", widget: "markdown" }
+          - { name: "contact_phone", label: "Số điện thoại liên hệ", widget: "string" }
   - name: "settings"
     label: "⚙️ Cài đặt trang web"
     files:
