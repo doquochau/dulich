@@ -1,0 +1,94 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "/images"
+
+locale: vi
+
+collections:
+  - name: "settings"
+    label: "⚙️ Cài đặt trang web"
+    files:
+      - name: "images"
+        label: "🖼️ Quản lý hình ảnh"
+        file: "config.json"
+        format: json
+        fields:
+          - label: "🏔️ Ảnh Hero – Banner đầu trang (ảnh nền lớn)"
+            name: "hero_bg"
+            widget: "image"
+            hint: "Ảnh nền section đầu trang. Nên dùng ảnh phong cảnh ngang, tối thiểu 1920x1080px."
+
+          - label: "🌄 Ảnh Banner giữa trang 1 (Mỗi chuyến đi là một kỷ niệm)"
+            name: "imgband1"
+            widget: "image"
+            hint: "Ảnh nền dải full-width đầu tiên."
+
+          - label: "🌅 Ảnh Banner giữa trang 2 (Lịch trình chi tiết)"
+            name: "imgband2"
+            widget: "image"
+            hint: "Ảnh nền dải full-width thứ hai."
+
+          - label: "🏢 Ảnh mục 'Tại sao chọn chúng tôi'"
+            name: "why_img"
+            widget: "image"
+            hint: "Ảnh hiển thị bên trái mục lý do chọn Vietkite."
+
+          - label: "🗺️ Mosaic 1 – Ảnh lớn bên trái (Tour đoàn)"
+            name: "mosaic_1"
+            widget: "image"
+            hint: "Ảnh lớn nhất trong lưới ảnh điểm đến."
+
+          - label: "🌊 Mosaic 2 – Đà Nẵng / Hội An"
+            name: "mosaic_2"
+            widget: "image"
+
+          - label: "🏖️ Mosaic 3 – Phú Quốc"
+            name: "mosaic_3"
+            widget: "image"
+
+          - label: "👨‍👩‍👧‍👦 Mosaic 4 – Tour gia đình"
+            name: "mosaic_4"
+            widget: "image"
+
+          - label: "⛵ Mosaic 5 – Hạ Long"
+            name: "mosaic_5"
+            widget: "image"
+
+          - label: "🏛️ Tour 1 – Huế – Đà Nẵng – Hội An"
+            name: "tour_1"
+            widget: "image"
+
+          - label: "🌴 Tour 2 – Phú Quốc"
+            name: "tour_2"
+            widget: "image"
+
+          - label: "🚢 Tour 3 – Hà Nội – Hạ Long"
+            name: "tour_3"
+            widget: "image"
+
+          - label: "🌊 Tour 4 – Quy Nhơn"
+            name: "tour_4"
+            widget: "image"
+
+          - label: "⛰️ Tour 5 – Sa Pa"
+            name: "tour_5"
+            widget: "image"
+
+          - label: "🌫️ Tour 6 – Đà Lạt"
+            name: "tour_6"
+            widget: "image"
+
+          - label: "⭐ Ảnh đánh giá 1 (Chị Thanh)"
+            name: "review_1"
+            widget: "image"
+
+          - label: "⭐ Ảnh đánh giá 2 (Gia đình chị Hòa)"
+            name: "review_2"
+            widget: "image"
+
+          - label: "⭐ Ảnh đánh giá 3 (Anh Nhân)"
+            name: "review_3"
+            widget: "image"
