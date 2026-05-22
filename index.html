@@ -442,8 +442,551 @@ footer{background:#070f09;padding:60px 24px 0;border-top:1px solid rgba(255,255,
   display:grid;grid-template-columns:1.8fr 1fr;gap:80px;
   padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.07)
 }
-.flogo-img{height:52px;width:auto;object-fit:contain;margin-bottom:16px}
-.fslogan">Đồng hành cùng bạn trong mọi chuyến đi</p>
+.fcol h4{font-size:14px;font-weight:700;color:var(--w);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:24px}
+.fslogan{font-family:var(--fd);font-size:22px;font-weight:700;color:var(--w);margin-bottom:12px;letter-spacing:-.2px}
+.fdesc{font-size:13.5px;color:rgba(255,255,255,.52);line-height:1.75;font-weight:300}
+.fphone-btn{
+  display:inline-flex;align-items:center;gap:14px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  padding:12px 28px;border-radius:14px;text-decoration:none;margin-bottom:28px;
+  transition:background .2s,border-color .2s
+}
+.fphone-btn:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2)}
+.fdot{width:8px;height:8px;border-radius:50%;background:#22a350;position:relative}
+.fdot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid #22a350;animation:fpulse 1.8s infinite}
+@keyframes fpulse{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.fnum{font-family:var(--fd);font-size:20px;font-weight:700;color:var(--w);letter-spacing:.3px}
+.frow{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.ficon{font-size:16px;line-height:1;margin-top:2px}
+.ftext{font-size:13.5px;color:rgba(255,255,255,.65);line-height:1.6;font-weight:300}
+.ftext a{color:rgba(255,255,255,.65);text-decoration:none;transition:color .2s}
+.ftext a:hover{color:var(--w)}
+.foot-btm{
+  max-width:1040px;margin:0 auto;padding:28px 0 36px;
+  display:flex;align-items:center;justify-content:between;gap:24px;flex-wrap:wrap
+}
+.foot-btm p{font-size:11.5px;color:rgba(255,255,255,.35);font-weight:400;letter-spacing:.2px}
+.gp-pill{
+  font-size:10px;font-weight:600;color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.05);padding:5px 12px;border-radius:6px;
+  letter-spacing:.3px
+}
+
+/* ═══ MODAL/FORM OVERLAY ═══ */
+.moverlay{
+  position:fixed;inset:0;z-index:2000;
+  background:rgba(7,18,10,.45);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:center;
+  padding:16px;opacity:0;pointer-events:none;
+  transition:opacity .4s cubic-bezier(.22,1,.36,1)
+}
+.moverlay.open{opacity:1;pointer-events:auto}
+.mwindow{
+  background:var(--w);width:100%;max-width:540px;
+  max-height:calc(100vh - 32px);overflow-y:auto;
+  border-radius:24px;border:1px solid var(--b);
+  box-shadow:var(--s3);
+  transform:scale(.94) translateY(10px);
+  transition:transform .4s cubic-bezier(.22,1,.36,1)
+}
+.moverlay.open .mwindow{transform:none}
+.mheader{
+  padding:24px 32px 18px;border-bottom:1px solid var(--b);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;background:var(--w);z-index:3
+}
+.mheader h3{font-family:var(--fd);font-size:22px;font-weight:700;color:var(--t1)}
+.mclose{
+  width:36px;height:36px;border-radius:50%;background:var(--gp);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--g);cursor:pointer;border:none;
+  transition:background .2s,transform .15s
+}
+.mclose:hover{background:var(--gm);transform:scale(1.05)}
+.mbody{padding:28px 32px 36px}
+.mgroup{margin-bottom:20px}
+.mgroup label{display:block;font-size:12.5px;font-weight:600;color:var(--t2);margin-bottom:8px}
+.mgroup label span{color:var(--o)}
+.fcontrol{
+  width:100%;font-family:var(--fb);font-size:14px;color:var(--t1);
+  padding:12px 16px;background:var(--w);
+  border:1.5px solid var(--b);border-radius:12px;outline:none;
+  transition:border-color .2s,box-shadow .2s
+}
+.fcontrol:focus{border-color:var(--gl);box-shadow:0 0 0 4px rgba(34,163,80,.1)}
+.fcontrol::placeholder{color:var(--t3);font-weight:300}
+.mrow-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cb-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.cb-lbl{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border:1.5px solid var(--b);border-radius:12px;
+  cursor:pointer;font-size:13px;font-weight:400;color:var(--t2);
+  transition:all .2s
+}
+.cb-lbl input{display:none}
+.cb-lbl::before{
+  content:'';width:16px;height:16px;border-radius:4px;
+  border:1.5px solid var(--b2);background:var(--w);
+  display:inline-block;flex-shrink:0;transition:all .2s
+}
+.cb-lbl input:checked + .cb-lbl::before,
+.cb-lbl:has(input:checked)::before{
+  background:var(--g);border-color:var(--g);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+  background-size:11px;background-position:center;background-repeat:no-repeat
+}
+.cb-lbl:has(input:checked){background:var(--gp);border-color:var(--gm);color:var(--g);font-weight:500}
+.btn-submit{
+  width:100%;background:var(--g);color:var(--w);
+  padding:14px;border-radius:12px;font-size:15px;font-weight:600;
+  border:none;cursor:pointer;margin-top:12px;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 4px 16px rgba(26,122,60,.25)
+}
+.btn-submit:hover{background:var(--gl);box-shadow:0 6px 22px rgba(26,122,60,.35)}
+.btn-submit:disabled{background:var(--t3);cursor:not-allowed;box-shadow:none}
+.success-box{text-align:center;padding:16px 0 8px;display:none}
+.sicon{
+  width:64px;height:64px;border-radius:50%;background:var(--gp);
+  color:var(--g);font-size:32px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;box-shadow:var(--s1)
+}
+.success-box h4{font-family:var(--fd);font-size:24px;font-weight:700;color:var(--t1);margin-bottom:10px}
+.success-box p{font-size:14px;color:var(--t2);line-height:1.6;font-weight:300;margin-bottom:28px}
+.mfooter{padding:14px 32px 20px;border-top:1px solid var(--b);background:#f9fdfb;text-align:center}
+.mfoot-p{font-size:12px;color:var(--t3);font-weight:300;line-height:1.5}
+
+/* Floating Actions */
+.fbtn-wrap{position:fixed;bottom:32px;right:32px;z-index:900;display:flex;flex-direction:column;gap:12px}
+.fbtn{
+  width:52px;height:52px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;text-decoration:none;box-shadow:var(--s2);
+  transition:transform .2s,box-shadow .2s
+}
+.fbtn:hover{transform:scale(1.08);box-shadow:var(--s3)}
+.fbtn-p{background:var(--o);color:var(--w);position:relative}
+.fbtn-p::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:1px solid var(--o);animation:fpulse 1.6s infinite}
+.fbtn-z{background:#0068ff;color:var(--w)}
+
+/* RESPONSIVE */
+@media(max-width:991px){
+  .nav{padding:0 24px}
+  .nav-links{display:none}
+  .hbg{display:flex}
+  .hero-stats-inner{grid-template-columns:1fr 1fr}
+  .hstat:nth-child(2){border-right:none}
+  .hstat:nth-child(1),.hstat:nth-child(2){border-bottom:1px solid rgba(255,255,255,.1)}
+  .why-grid{grid-template-columns:1fr;gap:48px}
+  .why-imgs{height:340px}
+  .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px}
+  .mimg:first-child{grid-column:1/3;grid-row:1/2}
+  .process-grid{grid-template-columns:1fr 1fr;gap:40px 0}
+  .process-grid::before{display:none}
+  .foot-inner{grid-template-columns:1fr;gap:48px}
+}
+@media(max-width:576px){
+  .nav{padding:0 16px;height:60px}
+  .mmenu{top:60px}
+  .nav-logo img{height:34px}
+  .hero-content{padding:100px 16px 140px}
+  .hero-btns{flex-direction:column;align-items:stretch;gap:10px}
+  .hero-btns button,.hero-btns a{justify-content:center}
+  .hero-stats-inner{grid-template-columns:1fr}
+  .hstat{border-right:none !important;border-bottom:1px solid rgba(255,255,255,.1)}
+  .hstat:last-child{border-bottom:none}
+  .sec-wrap{padding:64px 16px}
+  .srv-grid{grid-template-columns:1fr}
+  .srv-card{padding:28px 20px}
+  .mosaic{grid-template-columns:1fr;grid-template-rows:repeat(5,200px)}
+  .mimg:first-child{grid-column:auto;grid-row:auto}
+  .process-grid{grid-template-columns:1fr}
+  .pstep{padding:0}
+  .mbody{padding:20px 16px 28px}
+  .mheader{padding:20px 16px 14px}
+  .mrow-2,.cb-grid{grid-template-columns:1fr}
+  .foot-btm{flex-direction:column;align-items:flex-start;gap:14px;padding-bottom:100px}
+  .fbtn-wrap{bottom:16px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo"><img src="https://vietkite.com.vn/wp-content/uploads/2024/12/logo-cty-canh-dieu-viet-vietkite.jpg" alt="Vietkite"></a>
+  <ul class="nav-links">
+    <li><a href="#dich-vu">Dịch vụ</a></li>
+    <li><a href="#diem-den">Điểm đến nổi bật</a></li>
+    <li><a href="#tai-sao">Tại sao chọn chúng tôi</a></li>
+    <li><a href="#quy-trinh">Quy trình</a></li>
+    <li><a href="#danh-gia">Đánh giá</a></li>
+    <li><a href="#dang-ky" class="nav-cta" onclick="openMod();event.preventDefault()">Đăng ký tour</a></li>
+  </ul>
+  <div class="hbg" onclick="toggleM()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mmenu" id="mmenu">
+  <ul>
+    <li><a href="#dich-vu" onclick="closeM()">Dịch vụ</a></li>
+    <li><a href="#diem-den" onclick="closeM()">Điểm đến nổi bật</a></li>
+    <li><a href="#tai-sao" onclick="closeM()">Tại sao chọn chúng tôi</a></li>
+    <li><a href="#quy-trinh" onclick="closeM()">Quy trình</a></li>
+    <li><a href="#danh-gia" onclick="closeM()">Đánh giá</a></li>
+  </ul>
+  <a href="#dang-ky" class="mmenu-cta" onclick="closeM();openMod();event.preventDefault()">Đăng ký tour ngay</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg" data-img-bg="hero_bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-pill" data-cms-text="text_hero_pill">Vietkite Travel · Thành lập 02/11/2011</div>
+    <h1>
+      <span data-cms-text="text_hero_title_1">Tour đoàn riêng</span><br>
+      <span class="accent" data-cms-text="text_hero_title_accent">cao cấp</span><br>
+      <span data-cms-text="text_hero_title_2">theo yêu cầu</span>
+    </h1>
+    <div class="hero-line"></div>
+    <p class="hero-desc" data-cms-text="text_hero_desc">Lịch trình linh hoạt, dịch vụ đẳng cấp — chúng tôi lo trọn gói từ A đến Z để đoàn của bạn có chuyến đi thực sự đáng nhớ.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openMod()">Đăng ký tour ngay</button>
+      <a href="tel:0914278879" class="btn-outline-w" data-cms-href-tel>📞 Tư vấn miễn phí</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stats-inner">
+      <div class="hstat"><div class="hstat-num" data-cms-text="text_stat_years">14+</div><div class="hstat-lbl">Năm kinh nghiệm</div></div>
+      <div class="hstat"><div class="hstat-num" data-cms-text="text_stat_tours">500+</div><div class="hstat-lbl">Đoàn đã phục vụ</div></div>
+      <div class="hstat"><div class="hstat-num">98.5%</div><div class="hstat-lbl">Khách hàng hài lòng</div></div>
+      <div class="hstat"><div class="hstat-num">24/7</div><div class="hstat-lbl">Hỗ trợ trọn chuyến đi</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-wrap bg-pale" id="dich-vu">
+  <div class="sec-inner">
+    <div class="sec-kicker">Loại hình dịch vụ</div>
+    <h2 class="sec-h">Giải pháp du lịch trọn gói cho mọi tổ chức</h2>
+    <p class="sec-p">Từ những chuyến đi gắn kết đội ngũ đến hành trình nghỉ dưỡng cao cấp, chúng tôi thiết kế riêng để đáp ứng hoàn hảo mục tiêu của bạn.</p>
+    
+    <div class="srv-grid">
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">🏢</div>
+        <h3>Tour Doanh Nghiệp & M.I.C.E</h3>
+        <p>Kết hợp hoàn hảo giữa hội nghị, khen thưởng và du lịch. Nâng tầm hình ảnh thương hiệu doanh nghiệp công ty của bạn.</p>
+      </div>
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">🎯</div>
+        <h3>Team Building Đột Phá</h3>
+        <p>Kịch bản độc quyền, trò chơi sáng tạo giúp khơi phá năng lực tiềm ẩn và thắt chặt tình đoàn kết đội ngũ nhân sự.</p>
+      </div>
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">👑</div>
+        <h3>Hành Trình Luxury & VIP</h3>
+        <p>Hệ thống resort 5 sao, xe hạng sang, nhà hàng fine-dining và lịch trình bảo mật quyền riêng tư tuyệt đối.</p>
+      </div>
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">👨‍👩‍👧‍👦</div>
+        <h3>Tour Đoàn Gia Đình / Hội Nhóm</h3>
+        <p>Thiết kế nhịp độ di chuyển thong thả phù hợp cho cả người lớn tuổi và trẻ nhỏ, lưu giữ khoảnh khắc ấm áp.</p>
+      </div>
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">🌍</div>
+        <h3>Tour Nước Ngoài Thiết Kế Riêng</h3>
+        <p>Khám phá thế giới theo cách riêng của bạn. Bao trọn thủ tục visa cam kết tỷ lệ đậu cao, hướng dẫn viên kinh nghiệm.</p>
+      </div>
+      <div class="srv-card" data-anim>
+        <div class="srv-icon">🎫</div>
+        <h3>Dịch Vụ Lữ Hành Hỗ Trợ</h3>
+        <p>Đặt vé máy bay đoàn, thuê xe du lịch đời mới từ 4-45 chỗ, đặt phòng khách sạn giá đại lý và làm visa trọn gói nhanh chóng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="imgband">
+  <div class="imgband-bg" data-img-bg="imgband1"></div>
+  <div class="imgband-overlay"></div>
+  <div class="imgband-content">
+    <h2>Mỗi chuyến đi là một câu chuyện thành công được viết tiếp</h2>
+    <p>Chúng tôi tin rằng du lịch không chỉ là đổi thay điểm đến, mà là tạo dựng những cột mốc gắn kết vô giá.</p>
+  </div>
+</div>
+
+<section class="sec-wrap bg-white" id="diem-den">
+  <div class="sec-inner">
+    <div class="sec-kicker">Điểm đến hàng đầu</div>
+    <h2 class="sec-h">Cảm hứng cho hành trình tiếp theo của bạn</h2>
+    <p class="sec-p">Khám phá danh sách các toạ độ đang được các cơ quan, tổ chức và gia đình lựa chọn nhiều nhất mùa hè năm nay.</p>
+  </div>
+  <div class="mosaic">
+    <div class="mimg"><img data-img-src="mosaic_1" alt="Tour đoàn"><div class="mimg-cap">Tour đoàn doanh nghiệp</div></div>
+    <div class="mimg"><img data-img-src="mosaic_2" alt="Đà Nẵng"><div class="mimg-cap">Đà Nẵng – Hội An</div></div>
+    <div class="mimg"><img data-img-src="mosaic_3" alt="Phú Quốc"><div class="mimg-cap">Đảo Ngọc Phú Quốc</div></div>
+    <div class="mimg"><img data-img-src="mosaic_4" alt="Tour gia đình"><div class="mimg-cap">Tour gia đình cao cấp</div></div>
+    <div class="mimg"><img data-img-src="mosaic_5" alt="Hạ Long"><div class="mimg-cap">Vịnh Hạ Long kỳ vĩ</div></div>
+  </div>
+</section>
+
+<section class="sec-wrap bg-pale" id="tai-sao">
+  <div class="sec-inner">
+    <div class="why-grid">
+      <div class="why-imgs">
+        <div class="wimg"><img data-img-src="why_img" alt="Vietkite"></div>
+      </div>
+      <div>
+        <div class="sec-kicker">Giá trị khác biệt</div>
+        <h2 class="sec-h">Tại sao các tập đoàn lớn chọn Vietkite Travel?</h2>
+        <p class="sec-p" style="margin-bottom:0">Hơn cả một nhà tổ chức, chúng tôi là kiến trúc sư cho những trải nghiệm của đoàn bạn.</p>
+        
+        <div class="why-list">
+          <div class="witem" data-anwr>
+            <div class="wnum">01</div>
+            <div>
+              <h4>May đo cá nhân hóa 100%</h4>
+              <p>Không dùng chung một kịch bản nhàm chán. Lịch trình, thực đơn, trò chơi đều được thiết kế dựa trên văn hóa riêng của từng đoàn.</p>
+            </div>
+          </div>
+          <div class="witem" data-anwr>
+            <div class="wnum">02</div>
+            <div>
+              <h4>Khảo sát kỹ lưỡng, dịch vụ thực tế</h4>
+              <p>Mọi đối tác nhà hàng, khách sạn, nhà xe đều được đội ngũ chúng tôi khảo sát định kỳ, đảm bảo chất lượng đúng cam kết hợp đồng.</p>
+            </div>
+          </div>
+          <div class="witem" data-anwr>
+            <div class="wnum">03</div>
+            <div>
+              <h4>Minh bạch chi phí, không phát sinh</h4>
+              <p>Báo giá chi tiết rõ ràng từng hạng mục ngay từ đầu. Tuyệt đối không có chi phí ẩn hay tự ý thu thêm tiền của khách trong chuyến đi.</p>
+            </div>
+          </div>
+          <div class="witem" data-anwr>
+            <div class="wnum">04</div>
+            <div>
+              <h4>Đội ngũ tận tâm, xử lý tình huống nhanh</h4>
+              <p>Điều hành viên bám sát đoàn, hướng dẫn viên am hiểu tâm lý, nhiệt tình và có năng lực xử lý linh hoạt mọi phát sinh phát sinh.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-wrap bg-white">
+  <div class="sec-inner">
+    <div class="sec-kicker">Gợi ý lịch trình</div>
+    <h2 class="sec-h">Các chương trình tour đang được đánh giá cao</h2>
+    <p class="sec-p">Lịch trình mẫu có thể thay đổi, điều chỉnh linh hoạt theo số lượng ngày và yêu cầu riêng của cơ quan bạn.</p>
+    
+    <div class="tours-grid">
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_1" alt="Huế Đà Nẵng">
+          <span class="tc-badge">Bán chạy</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Di sản Miền Trung: Huế – Đà Nẵng – Hội An</h3>
+          <p class="tc-meta">⏱ 4 Ngày 3 Đêm &nbsp;·&nbsp; 🚌 Xe đời mới</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">3.890.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_2" alt="Phú Quốc">
+          <span class="tc-badge">Nghỉ dưỡng</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Phú Quốc: Thiên Đường Nắng Vàng & Teambuilding</h3>
+          <p class="tc-meta">⏱ 3 Ngày 2 Đêm &nbsp;·&nbsp; ✈️ Bao gồm vé máy bay</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">5.250.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_3" alt="Hạ Long">
+          <span class="tc-badge">Premium</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Hành Trình Phương Bắc: Hà Nội – Vịnh Hạ Long</h3>
+          <p class="tc-meta">⏱ 4 Ngày 3 Đêm &nbsp;·&nbsp; 🚢 Du thuyền 5 sao</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">4.650.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_4" alt="Quy Nhơn">
+          <span class="tc-badge">Biển đảo</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Quy Nhơn – Kỳ Co – Eo Gió: Biển Xanh Vẫy Gọi</h3>
+          <p class="tc-meta">⏱ 3 Ngày 2 Đêm &nbsp;·&nbsp; 🚌 Trọn gói dịch vụ</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">3.490.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_5" alt="Sa Pa">
+          <span class="tc-badge">Trải nghiệm</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Chinh Phục Fansipan: Sapa Thành Phố Trong Sương</h3>
+          <p class="tc-meta">⏱ 3 Ngày 3 Đêm &nbsp;·&nbsp; 🛏 Khách sạn trung tâm</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">2.990.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+      <div class="tcard" data-anim>
+        <div class="tc-img">
+          <img data-img-src="tour_6" alt="Đà Lạt">
+          <span class="tc-badge">Gắn kết</span>
+        </div>
+        <div class="tc-body">
+          <h3 class="tc-name">Đà Lạt Mộng Mơ: Săn Mây & Gala Dinner Ấm Áp</h3>
+          <p class="tc-meta">⏱ 3 Ngày 3 Đêm &nbsp;·&nbsp; 🚌 Xe giường nằm VIP</p>
+        </div>
+        <div class="tc-foot">
+          <div class="tc-price">2.750.000 <small>đ/khách</small></div>
+          <button class="tc-btn" onclick="openMod()">Chi tiết</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="imgband">
+  <div class="imgband-bg" data-img-bg="imgband2"></div>
+  <div class="imgband-overlay"></div>
+  <div class="imgband-content">
+    <h2>Lịch trình chi tiết, báo giá trong ngày</h2>
+    <p>Chuyên viên tư vấn phản hồi trong 30 phút. Hoàn toàn miễn phí.</p>
+    <a href="tel:0914278879" class="btn-primary" data-cms-href-tel>📞 <span data-cms-text="text_hotline_display">0914.27.88.79</span></a>
+  </div>
+</div>
+
+<section class="sec-wrap bg-white" id="quy-trinh">
+  <div class="sec-inner">
+    <div class="sec-kicker">Quy trình làm việc</div>
+    <h2 class="sec-h">Từ ý tưởng đến chuyến đi hoàn hảo</h2>
+    <p class="sec-p">Chuyên nghiệp, nhanh chóng và tinh gọn tối đa thời gian chuẩn bị cho người phụ trách của tổ chức doanh nghiệp.</p>
+    
+    <div class="process-grid">
+      <div class="pstep" data-anim>
+        <div class="pring">1</div>
+        <h4>Tiếp nhận thông tin</h4>
+        <p>Ghi nhận yêu cầu về số lượng khách, điểm đến mong muốn, ngân sách dự kiến và mục tiêu chuyến đi.</p>
+      </div>
+      <div class="pstep" data-anim>
+        <div class="pring">2</div>
+        <h4>Thiết kế & Báo giá</h4>
+        <p>Gửi lịch trình chi tiết kèm bảng báo giá chi tiết rõ ràng các phương án hạng dịch vụ trong vòng 2-4 giờ làm việc.</p>
+      </div>
+      <div class="pstep" data-anim>
+        <div class="pring">3</div>
+        <h4>Ký hợp đồng & Cọc</h4>
+        <p>Chốt phương án cuối cùng, ký hợp đồng pháp lý bảo vệ quyền lợi hai bên và tiến hành đặt cọc giữ dịch vụ.</p>
+      </div>
+      <div class="pstep" data-anim>
+        <div class="pring">4</div>
+        <h4>Khởi hành & Trải nghiệm</h4>
+        <p>Vietkite Travel triển khai vận hành điều hành chuyến đi, có nhân sự theo sát hỗ trợ đoàn suốt hành trình.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-wrap bg-pale" id="danh-gia">
+  <div class="sec-inner">
+    <div class="sec-kicker">Ý kiến khách hàng</div>
+    <h2 class="sec-h">Họ nói gì về trải nghiệm cùng Vietkite?</h2>
+    <p class="sec-p">Niềm tin và sự hài lòng của những người đồng hành chính là tài sản lớn nhất của công ty lữ hành chúng tôi.</p>
+    
+    <div class="rev-grid">
+      <div class="rcard" data-anim>
+        <div class="rcard-img"><img data-img-src="review_1" alt="Review 1"></div>
+        <div class="rcard-body">
+          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+          <p class="rtext">"Chuyến đi Phú Quốc vừa rồi của công ty rất thành công. Các bạn thiết kế kịch bản team building vui, ý nghĩa, gắn kết mọi người rất tốt. Khách sạn đẹp, đồ ăn ngon miệng vừa vị."</p>
+          <div class="rreviewer">
+            <div class="ravatar">TT</div>
+            <div>
+              <div class="rname">Chị Thanh Thảo</div>
+              <div class="rsub">Trưởng phòng Nhân sự TechCorp</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rcard" data-anim>
+        <div class="rcard-img"><img data-img-src="review_2" alt="Review 2"></div>
+        <div class="rcard-body">
+          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+          <p class="rtext">"Gia đình tôi 12 người cả người già và trẻ nhỏ đi Đà Nẵng theo tour riêng của Vietkite. Lịch trình thong thả, xe rộng rãi, hướng dẫn viên chu đáo, chăm lo từng bữa ăn giấc ngủ."</p>
+          <div class="rreviewer">
+            <div class="ravatar">MH</div>
+            <div>
+              <div class="rname">Gia đình chị Minh Hòa</div>
+              <div class="rsub">Quận 3, TP. Hồ Chí Minh</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rcard" data-anim>
+        <div class="rcard-img"><img data-img-src="review_3" alt="Review 3"></div>
+        <div class="rcard-body">
+          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+          <p class="rtext">"Đoàn khách hàng VIP của chúng tôi đánh giá rất cao dịch vụ luxury mà Vietkite cung cấp tại Hạ Long. Sự chuyên nghiệp, bảo mật thông tin và tinh tế trong phục vụ khiến tôi rất an tâm."</p>
+          <div class="rreviewer">
+            <div class="ravatar">HN</div>
+            <div>
+              <div class="rname">Anh Hoàng Nhân</div>
+              <div class="rsub">Giám đốc Điều hành VinaGroup</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-inner">
+    <h2>Sẵn sàng cho chuyến đi bùng nổ năng lượng?</h2>
+    <p>Để lại thông tin yêu cầu nhanh, nhận ngay chương trình thiết kế riêng biệt kèm báo giá ưu đãi tốt nhất trong hôm nay.</p>
+    <button class="cta-reg-btn" onclick="openMod()">📩 Nhận tư vấn & Lịch trình riêng</button>
+    <div class="cta-contacts">
+      <a href="tel:0914278879" class="ccard" data-cms-href-tel>
+        <div class="cicon ci-phone">📞</div>
+        <div><div class="clbl">Gọi ngay</div><div class="cval" data-cms-text="text_hotline_display">0914.27.88.79</div></div>
+      </a>
+      <a href="mailto:info@vietkite.com.vn" class="ccard">
+        <div class="cicon ci-mail">✉️</div>
+        <div><div class="clbl">Gửi email</div><div class="cval">info@vietkite.com.vn</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="fcol">
+      <img src="https://vietkite.com.vn/wp-content/uploads/2024/12/logo-cty-canh-dieu-viet-vietkite.jpg" alt="Vietkite" class="flogo-img">
+      <p class="fslogan">Đồng hành cùng bạn trong mọi chuyến đi</p>
       <p class="fdesc">Công ty TNHH TM DV Du Lịch Vietkite — đơn vị lữ hành chuyên nghiệp tổ chức tour trong và ngoài nước, teambuilding, visa và vé máy bay từ năm 2011.</p>
     </div>
     <div class="fcol">
@@ -464,6 +1007,122 @@ footer{background:#070f09;padding:60px 24px 0;border-top:1px solid rgba(255,255,
     <span class="gp-pill">🛡 GP: 79-437/2020/TCDL-GP LHQT</span>
   </div>
 </footer>
+
+<div class="moverlay" id="moverlay" onclick="handleOvClick(event)">
+  <div class="mwindow">
+    <div class="mheader">
+      <h3>Yêu cầu tư vấn tour đoàn</h3>
+      <button class="mclose" onclick="closeMod()">✕</button>
+    </div>
+    
+    <div class="mbody">
+      <div class="success-box" id="sbox">
+        <div class="sicon">✓</div>
+        <h4>Gửi thông tin thành công!</h4>
+        <p>Cảm ơn ông đã gửi thông tin. Đội ngũ Vietkite Travel sẽ xử lý kịch bản lịch trình và gọi lại tư vấn báo giá ngay cho ông trong thời gian sớm nhất.</p>
+        <button class="btn-primary" onclick="closeMod()" style="width:100%;justify-content:center">Đóng cửa sổ</button>
+      </div>
+
+      <div id="fbody">
+        <div class="mgroup">
+          <label>Họ và tên người liên hệ <span>*</span></label>
+          <input type="text" class="fcontrol" id="fn" placeholder="Ví dụ: Nguyễn Văn A">
+        </div>
+        
+        <div class="mrow-2">
+          <div class="mgroup">
+            <label>Số điện thoại di động <span>*</span></label>
+            <input type="tel" class="fcontrol" id="fp" placeholder="Ví dụ: 0912345678">
+          </div>
+          <div class="mgroup">
+            <label>Địa chỉ Email của ông</label>
+            <input type="email" class="fcontrol" id="fe" placeholder="VD: name@company.com">
+          </div>
+        </div>
+
+        <div class="mgroup">
+          <label>Tên cơ quan / Công ty (nếu có)</label>
+          <input type="text" class="fcontrol" id="fc" placeholder="Tên doanh nghiệp tổ chức của ông">
+        </div>
+
+        <div class="mrow-2">
+          <div class="mgroup">
+            <label>Loại hình nhóm đoàn</label>
+            <select class="fcontrol" id="ftype">
+              <option value="">-- Chọn loại hình đoàn --</option>
+              <option value="Công ty / Doanh nghiệp">Công ty / Doanh nghiệp</option>
+              <option value="Gia đình / Hội nhóm">Gia đình / Hội nhóm</option>
+              <option value="Trường học / Tổ chức khác">Trường học / Tổ chức khác</option>
+            </select>
+          </div>
+          <div class="mgroup">
+            <label>Số lượng thành viên dự kiến</label>
+            <input type="number" class="fcontrol" id="fcount" placeholder="Ví dụ: 40">
+          </div>
+        </div>
+
+        <div class="mgroup">
+          <label>Điểm đến mong muốn khám phá</label>
+          <input type="text" class="fcontrol" id="fdest" placeholder="Ví dụ: Phú Quốc, Quy Nhơn, Thái Lan...">
+        </div>
+
+        <div class="mrow-2">
+          <div class="mgroup">
+            <label>Ngày dự kiến khởi hành</label>
+            <input type="date" class="fcontrol" id="fdate">
+          </div>
+          <div class="mgroup">
+            <label>Thời gian chuyến đi</label>
+            <select class="fcontrol" id="fdur">
+              <option value="">-- Chọn số ngày --</option>
+              <option value="3 Ngày 2 Đêm">3 Ngày 2 Đêm</option>
+              <option value="4 Ngày 3 Đêm">4 Ngày 3 Đêm</option>
+              <option value="2 Ngày 1 Đêm">2 Ngày 1 Đêm</option>
+              <option value="Khác">Yêu cầu số ngày khác</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mgroup">
+          <label>Ngân sách dự kiến (đ/khách)</label>
+          <select class="fcontrol" id="fbudget">
+            <option value="">-- Chọn mức ngân sách --</option>
+            <option value="Dưới 3 triệu">Dưới 3 triệu / khách</option>
+            <option value="3 triệu - 5 triệu">3 triệu - 5 triệu / khách</option>
+            <option value="Trêm 5 triệu">Trên 5 triệu (Cao cấp)</option>
+            <option value="Chưa xác định">Chưa có ngân sách cố định</option>
+          </select>
+        </div>
+
+        <div class="mgroup">
+          <label>Dịch vụ cần bổ sung tập trung</label>
+          <div class="cb-grid">
+            <label class="cb-lbl"><input type="checkbox" class="cb-loaihinh" value="Team Building">Team Building</label>
+            <label class="cb-lbl"><input type="checkbox" class="cb-loaihinh" value="Gala Dinner">Gala Dinner</label>
+            <label class="cb-lbl"><input type="checkbox" class="cb-loaihinh" value="Hội nghị / MICE">Hội nghị MICE</label>
+            <label class="cb-lbl"><input type="checkbox" class="cb-loaihinh" value="Chỉ nghỉ dưỡng">Chỉ nghỉ dưỡng</label>
+          </div>
+        </div>
+
+        <div class="mgroup" style="margin-bottom:12px">
+          <label>Yêu cầu đặc biệt hoặc ghi chú riêng</label>
+          <textarea class="fcontrol" id="fnote" rows="3" placeholder="Nhập các mong muốn đặc thù của đoàn tại đây..."></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="submitF()">Gửi yêu cầu thiết kế tour</button>
+      </div>
+    </div>
+    
+    <div class="mfooter" id="mfooter">
+      <p class="mfoot-p">Thông tin của ông được bảo mật hoàn toàn. Chuyên viên của Vietkite Travel sẽ chủ động liên hệ lại sau ít phút.</p>
+    </div>
+  </div>
+</div>
+
+<div class="fbtn-wrap">
+  <a href="tel:0914278879" class="fbtn fbtn-p" data-cms-href-tel>📞</a>
+  <a href="https://zalo.me/0914278879" class="fbtn fbtn-z" target="_blank">💬</a>
+</div>
 
 <script>
 const nav = document.getElementById('nav');
