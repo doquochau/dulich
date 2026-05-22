@@ -12,34 +12,80 @@ collections:
     label: "⚙️ Cài đặt trang web"
     files:
       - name: "images"
-        label: "🖼️ Quản lý hình ảnh"
+        label: "📝 Quản lý Nội dung & Hình ảnh"
         file: "config.json"
         format: json
         fields:
+          # =========================================================
+          # 📑 PHẦN CHỈNH SỬA CHỮ (TEXT FIELDS)
+          # =========================================================
+          - label: "📌 [TEXT] Tiêu đề phụ Banner (Pill đầu trang)"
+            name: "text_hero_pill"
+            widget: "string"
+            default: "Vietkite Travel · Thành lập 02/11/2011"
+
+          - label: "📌 [TEXT] Tiêu đề chính Hero (Dòng 1)"
+            name: "text_hero_title_1"
+            widget: "string"
+            default: "Tour đoàn riêng"
+
+          - label: "📌 [TEXT] Tiêu đề chính Hero (Dòng chữ Nghiêng/Cam)"
+            name: "text_hero_title_accent"
+            widget: "string"
+            default: "cao cấp"
+
+          - label: "📌 [TEXT] Tiêu đề chính Hero (Dòng 3)"
+            name: "text_hero_title_2"
+            widget: "string"
+            default: "theo yêu cầu"
+
+          - label: "📌 [TEXT] Đoạn mô tả ngắn đầu trang"
+            name: "text_hero_desc"
+            widget: "text"
+            default: "Lịch trình linh hoạt, dịch vụ đẳng cấp — chúng tôi lo trọn gói từ A đến Z để đoàn của bạn có chuyến đi thực sự đáng nhớ."
+
+          - label: "📞 [HOTLINE] Số điện thoại chính toàn trang (Viết liền, ví dụ: 0914278879)"
+            name: "text_hotline"
+            widget: "string"
+            default: "0914278879"
+
+          - label: "📞 [HOTLINE] Định dạng hiển thị (Ví dụ: 0914.27.88.79)"
+            name: "text_hotline_display"
+            widget: "string"
+            default: "0914.27.88.79"
+
+          - label: "📊 [THỐNG KÊ] Số năm kinh nghiệm (Ví dụ: 14+)"
+            name: "text_stat_years"
+            widget: "string"
+            default: "14+"
+
+          - label: "📊 [THỐNG KÊ] Số đoàn đã phục vụ (Ví dụ: 500+)"
+            name: "text_stat_tours"
+            widget: "string"
+            default: "500+"
+
+          # =========================================================
+          # 🖼️ PHẦN QUẢN LÝ HÌNH ẢNH
+          # =========================================================
           - label: "🏔️ Ảnh Hero – Banner đầu trang (ảnh nền lớn)"
             name: "hero_bg"
             widget: "image"
-            hint: "Ảnh nền section đầu trang. Nên dùng ảnh phong cảnh ngang, tối thiểu 1920x1080px."
 
           - label: "🌄 Ảnh Banner giữa trang 1 (Mỗi chuyến đi là một kỷ niệm)"
             name: "imgband1"
             widget: "image"
-            hint: "Ảnh nền dải full-width đầu tiên."
 
           - label: "🌅 Ảnh Banner giữa trang 2 (Lịch trình chi tiết)"
             name: "imgband2"
             widget: "image"
-            hint: "Ảnh nền dải full-width thứ hai."
 
           - label: "🏢 Ảnh mục 'Tại sao chọn chúng tôi'"
             name: "why_img"
             widget: "image"
-            hint: "Ảnh hiển thị bên trái mục lý do chọn Vietkite."
 
           - label: "🗺️ Mosaic 1 – Ảnh lớn bên trái (Tour đoàn)"
             name: "mosaic_1"
             widget: "image"
-            hint: "Ảnh lớn nhất trong lưới ảnh điểm đến."
 
           - label: "🌊 Mosaic 2 – Đà Nẵng / Hội An"
             name: "mosaic_2"
